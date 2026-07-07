@@ -26,6 +26,10 @@ class Program
     // }
     
     // task4
+    // static void DisplayMenu()
+    // {
+    //     Console.WriteLine("1) Start, 2) Help, 3) Exit");
+    // }
     static void Main(string[] args)
     {
         // Console.Write("dear user , enter your name ");
@@ -43,7 +47,11 @@ class Program
        //     double temp = double.Parse(Console.ReadLine());
        //     Console.WriteLine($"in fahrenhiet {CelsiusToFahrenheit(temp)}");
        //
+       
        //
+       // DisplayMenu();
+       
+       
 
     }
 }

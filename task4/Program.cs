@@ -49,7 +49,31 @@ class Program
     {
         return 2 *( length + width) ;
     }
+    // task7
+    static string GetGradeLetter(int grade)
+    {
+        if (grade >= 85)
+        {
+            return "A";
+        }
+        else if (grade >= 75)
+        {
+            return "B";
+        }
+        else if (grade >= 60)
+        {
+            return "C";
+        }
+        else if(grade>=50)
 
+        {
+            return "D";
+        }
+        else
+        {
+            return "F";
+        }
+    }
     
     static void Main(string[] args)
     {
@@ -93,11 +117,15 @@ class Program
        //
        // Console.WriteLine("cool, now let's try the perimeter");
        // Console.WriteLine($"the perimeter  of the rectangle = {CalculatePerimeter( length, width)}");
-
-
-
-
        
+       Console.Write("dear student, enter your mark , to see your grade:");
+       int mark = int.Parse(Console.ReadLine());
+       Console.WriteLine($" your grade ragarding your mark is {GetGradeLetter( mark) }");
+
+
+
+
+
 
 
 

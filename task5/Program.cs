@@ -48,18 +48,30 @@ class Program
         //
         
         
-        // task4
-        Queue<string> customers = new Queue<string>();
-        for (int i = 0; i < 3; i++)
-        {
-            Console.Write("dear customer , please enter your name ");
-            string customer = Console.ReadLine();
-            customers.Enqueue(customer);
-        }
-        Console.Write($"the first costumer to be served is : {customers.Dequeue()}");
-
-
-
+    //     // task4
+    //     Queue<string> customers = new Queue<string>();
+    //     for (int i = 0; i < 3; i++)
+    //     {
+    //         Console.Write("dear customer , please enter your name ");
+    //         string customer = Console.ReadLine();
+    //         customers.Enqueue(customer);
+    //     }
+    //     Console.Write($"the first costumer to be served is : {customers.Dequeue()}");
+    int total = 0;
+    int[] grades = new int[5];
+    for (int i = 0; i < 5; i++)
+    {
+        Console.Write("dear student, please enter your mark");
+        int mark = int.Parse(Console.ReadLine());
+        total += mark;
+        grades[i] = mark;
+    }
+    grades.Sort();
+    double avg = total / grades.Length;
+    Console.WriteLine($"the lowest grade is {grades[0]}");
+    Console.WriteLine($"the highest grade is {grades[4]}");
+    Console.WriteLine($"the averge of the grades is  {avg}");
+    
 
     }
 }

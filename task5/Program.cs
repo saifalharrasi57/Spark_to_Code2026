@@ -26,7 +26,29 @@ class Program
         
         return  -1 ;
 
-    } 
+    }
+
+    static Queue<string> RemoveJob(Queue<string> jops,string name )
+    {
+        while (! jops.Contains(name))
+        {
+            Console.WriteLine("this is jop is not available try again");
+            name = Console.ReadLine();
+
+        }
+        Queue<string> ret_queue = new Queue<string>();
+        foreach (string i  in jops)
+        {
+            if (i == name)
+            {
+                continue;
+            }
+            ret_queue.Enqueue(i);
+            
+        }
+
+        return ret_queue;
+    }
     static void Main(string[] antrgs)
     {
         //task1
@@ -141,9 +163,38 @@ class Program
 //         }
 //         Console.WriteLine($"the average of your grades , dear student is: {CalculateAverage(grades)}");
 //         Console.WriteLine($" the least grade within your gradelist is {FindFirstFailing(grades)}");
-//
-//         
-//
-// //
+
+    
+        // task10
+
+        Queue<string> print_jops = new Queue<string>();
+        bool choice = true;
+        while (choice)
+        {
+            Console.Write("dear user add print job name: ");
+            string jop = Console.ReadLine().ToLower();
+            if (jop == "done")
+            {
+                choice = false;
+            }
+            else
+            {
+                print_jops.Enqueue(jop);
+            }
+
+        }
+        Console.Write("enter jop name to be removed : ");
+        string rem_jop= Console.ReadLine().ToLower();
+        print_jops = RemoveJob(print_jops, rem_jop);
+        Console.WriteLine(" the remaining jops are:");
+        foreach (string i in print_jops)
+        {
+            Console.WriteLine(i);
+        }
+        {
+            
+        }
+
+
     }
 }

@@ -57,21 +57,51 @@ class Program
     //         customers.Enqueue(customer);
     //     }
     //     Console.Write($"the first costumer to be served is : {customers.Dequeue()}");
-    int total = 0;
-    int[] grades = new int[5];
-    for (int i = 0; i < 5; i++)
-    {
-        Console.Write("dear student, please enter your mark");
-        int mark = int.Parse(Console.ReadLine());
-        total += mark;
-        grades[i] = mark;
-    }
-    grades.Sort();
-    double avg = total / grades.Length;
-    Console.WriteLine($"the lowest grade is {grades[0]}");
-    Console.WriteLine($"the highest grade is {grades[4]}");
-    Console.WriteLine($"the averge of the grades is  {avg}");
     
-
+    //task5
+    // int total = 0;
+    // int[] grades = new int[5];
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     Console.Write("dear student, please enter your mark");
+    //     int mark = int.Parse(Console.ReadLine());
+    //     total += mark;
+    //     grades[i] = mark;
+    // }
+    // grades.Sort();
+    // double avg = total / grades.Length;
+    // Console.WriteLine($"the lowest grade is {grades[0]}");
+    // Console.WriteLine($"the highest grade is {grades[4]}");
+    // Console.WriteLine($"the averge of the grades is  {avg}");
+//     
+//     List<string> items = new List<string>();
+//     bool choice = true;
+//     while (choice) 
+//     {
+//         Console.Write("dear user, enter 1 itemat once ");
+//         string item = Console.ReadLine().ToLower();
+//         if (item == "done")
+//         {
+//             choice = false;
+//         }
+//         else
+//         {items.Add(item);
+//         }
+//
+//         
+//     }
+//     foreach (string i in items)
+//     {
+//         Console.WriteLine(i);
+//     }
+//
+//     Console.Write("dear user , your cart id full, chose 1 item to remove: ");
+//     string remove = Console.ReadLine();
+//     items.Remove(remove);
+//     foreach (string i in items)
+//     {
+//         Console.WriteLine(i);
+//     }
+//
     }
 }

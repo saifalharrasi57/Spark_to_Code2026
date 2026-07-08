@@ -2,7 +2,32 @@
 
 class Program
 {
-    static void Main(string[] args)
+    static double CalculateAverage(List<int> values)
+    {
+        int total = 0;
+        foreach (int i in values)
+        {
+            total += i;
+        }
+
+        return total / values.Count;
+        
+    }
+
+    static int FindFirstFailing(List<int> values)
+    {
+        foreach (int i in values)
+        {
+            if (i < 60)
+            {
+                return i;
+            }
+        }
+        
+        return  -1 ;
+
+    } 
+    static void Main(string[] antrgs)
     {
         //task1
         // int[] grades = new int[5];
@@ -103,5 +128,22 @@ class Program
 //         Console.WriteLine(i);
 //     }
 //
+//         //task9
+//         List<int> grades = new List<int>();
+//         Console.Write("dear user, how many grades do you wanna insert");
+//         int num_grades = int.Parse(Console.ReadLine());
+//         for (int i = 0; i < num_grades; i++)
+//         {
+//             Console.Write("enter the grades 1 by 1:");
+//             int grade = int.Parse(Console.ReadLine());
+//             grades.Add(grade);
+//            
+//         }
+//         Console.WriteLine($"the average of your grades , dear student is: {CalculateAverage(grades)}");
+//         Console.WriteLine($" the least grade within your gradelist is {FindFirstFailing(grades)}");
+//
+//         
+//
+// //
     }
 }

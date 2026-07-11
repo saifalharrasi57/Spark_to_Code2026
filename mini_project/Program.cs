@@ -141,6 +141,10 @@ class Program
                 Console.WriteLine($"the receiver updated balance= {balance[index2]}");
 
             }
+            else
+            {
+                Console.WriteLine("error, please, enter a positive amount or does not exceed the account current balance ");
+            }
 
         }
     }

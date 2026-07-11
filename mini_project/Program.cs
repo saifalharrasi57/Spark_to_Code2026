@@ -144,6 +144,44 @@ class Program
 
         }
     }
+    static void ListAllAccounts()
+    {
+        if (account_number.Count == 0)
+        {
+            Console.WriteLine("No accounts found in the system.");
+            return;
+        }
+
+        Console.WriteLine("\n--- Registered Accounts Directory ---");
+        for (int i = 0; i < account_number.Count; i++)
+        {
+            Console.WriteLine($"Account #: {account_number[i]} | Holder: {names[i]} | Balance: ${balance[i]}");
+        }
+    }
+
+    // NEW SERVICE 2: Close an Account
+    static void CloseAccount()
+    {
+        Console.Write("dear user, enter the account number to close: ");
+        int account_num = int.Parse(Console.ReadLine());
+        int index = account_number.IndexOf(account_num);
+
+        if (index != -1)
+        {
+            Console.WriteLine($"Processing closure for account holder: {names[index]}");
+            
+            // Remove the elements at the matched index across all 3 lists
+            names.RemoveAt(index);
+            account_number.RemoveAt(index);
+            balance.RemoveAt(index);
+
+            Console.WriteLine("Success! The account has been securely closed.");
+        }
+        else
+        {
+            Console.WriteLine("error, entered account does not exist");
+        }
+    }
 
     static void Main(string[] args)
     {
@@ -188,10 +226,10 @@ class Program
                     TransferAmount();
                     break;
                 case 6:
-                    // TODO: call your first custom service function here
+                    ListAllAccounts();
                     break;
                 case 7:
-                    // TODO: call your second custom service function here
+                    CloseAccount();
                     break;
                 case 8:
                     exitApp = true;

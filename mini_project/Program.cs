@@ -96,6 +96,54 @@ class Program
        
     }
     
+    
+    static void ShowBalance()
+    {
+        Console.Write("dear user, enter your account number ");
+        int account_num = int.Parse(Console.ReadLine());
+        int index = account_number.IndexOf(account_num);
+        if (! (index == -1))
+            
+        {
+            Console.WriteLine("here is the customer account info:");
+            Console.WriteLine($" custumer name :{names[index]}, account number: {account_num}: , initial deposit {balance[index]} :  ");
+        }
+        else
+        {
+            Console.WriteLine("error, entered account does not exist");
+        }
+        
+    }
+
+
+    static void TransferAmount()
+    {
+        Console.Write("dear user, enter your account number ");
+        int account_num1 = int.Parse(Console.ReadLine());
+        Console.Write("dear user, enter receiver account number ");
+        int account_num2 = int.Parse(Console.ReadLine());
+        if (!(account_number.Contains(account_num2) && account_number.Contains(account_num1)))
+        {
+            Console.WriteLine(" error one of the accounts , do not exists ");
+        }
+        else
+        {
+            Console.Write("dear user,enter the transfred  amount:");
+            double transferd_amount = double.Parse(Console.ReadLine());
+            int index = account_number.IndexOf(account_num1);
+            int index2 = account_number.IndexOf(account_num2);
+            if (transferd_amount >= 0 && !(transferd_amount > balance[index]))
+            {
+                balance[index] -= transferd_amount;
+                balance[index2] += transferd_amount;
+                
+                Console.WriteLine($"the sender updated balance= {balance[index]}");
+                Console.WriteLine($"the receiver updated balance= {balance[index2]}");
+
+            }
+
+        }
+    }
 
     static void Main(string[] args)
     {
@@ -133,12 +181,12 @@ class Program
                 case 3:
                     WithdrawMoney();
                     break;
-                // case 4:
-                //     ShowBalance();
-                //     break;
-                // case 5:
-                //     TransferAmount();
-                //     break;
+                case 4:
+                    ShowBalance();
+                    break;
+                case 5:
+                    TransferAmount();
+                    break;
                 case 6:
                     // TODO: call your first custom service function here
                     break;

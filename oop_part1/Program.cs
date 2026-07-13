@@ -62,7 +62,7 @@ class student
     private string email;
     private int age;
 
-    private void registration(string email)
+    public void Register(string email) 
     {
         this.email = email; // we did this , becuase we want to store the value of object email, remember we can't assing it in the main function
         SendEmail();
@@ -232,6 +232,29 @@ class Program
                     }
 
                     break;
+                
+                case "6":
+                    Console.Write("enter the student name:");
+                    string stu_name = Console.ReadLine();
+                    Console.Write("enter the student e-mail:");
+                    string mail = Console.ReadLine();
+                    if (stu_name == s1.name)
+                    {
+                        s1.Register(mail);
+                        Console.WriteLine("do not share your e-mail");
+                    }
+                    else if (stu_name == s2.name)
+                    {
+                        s2.Register(mail);
+                        Console.WriteLine("do not share your e-mail");
+                    }
+                    else
+                    {
+                        Console.WriteLine("invalid input, such a name doesn't exist");
+                    }
+                    break;
+                    
+                    
                 
 
 

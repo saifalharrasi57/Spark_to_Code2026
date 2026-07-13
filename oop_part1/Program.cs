@@ -1,4 +1,5 @@
-﻿using System.Runtime.Intrinsics.X86;
+﻿using System.Net.Sockets;
+using System.Runtime.Intrinsics.X86;
 
 namespace oop_part1;
 
@@ -157,6 +158,61 @@ class Program
         p2.ProductName = "Mechanical Keyboard";
         p2.price = 15.570;
         p2.StackQuantity = 20;
+
+        bool choice = true;
+        while (choice)
+        {
+            // 1. Display the options to the user
+            Console.WriteLine("\n--- Main Menu ---");
+            Console.WriteLine("1. View Account Details");
+            Console.WriteLine("2. Update Student Address");
+            Console.WriteLine("3. Make a Deposit");
+            // ... list out the rest of your cases here ...
+            Console.WriteLine("20. Exit");
+            Console.Write("Enter your choice (1-20): ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.Write("enter the accountNumber: ");
+                    int account = int.Parse(Console.ReadLine());
+                    if (account == b1.accountnumber)
+                    {
+                        b1.CheckBalance();
+                    }
+
+                   else if (account == b2.accountnumber)
+                   {
+                       b2.CheckBalance();
+                   }
+                   else
+                   {
+                       Console.WriteLine("invalid input, such account doesn't exist");
+                   }
+                    break;
+                case "2":
+                    Console.Write("enter the name of the student: ");
+                    string name = Console.ReadLine();
+                    if (name == s1.name)
+                    {
+                        Console.Write("enter the new address:");
+                        s1.address = Console.ReadLine();
+                    }
+                    else if(name==s2.name)
+                     {
+                    Console.Write("enter the new address:");
+                    s2.address = Console.ReadLine();
+                     }
+                    else
+                    {
+                        Console.WriteLine("invalid input, such a name doesn't exist");
+                    }
+                    break;
+                
+                   
+                   
+                   
+            }
+        }
 
 
 

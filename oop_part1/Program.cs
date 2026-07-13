@@ -70,12 +70,54 @@ class student
         Console.WriteLine($"[Notification] A registration email has been simulated/sent.");
     }
     
-    
-    
-    
-    
-    
+}
 
+class product
+{
+    public string ProductName;
+    public double price;
+
+    public int StackQuantity;
+
+    public void Sell(int quantity)
+    {
+        if (StackQuantity < quantity)
+        {
+            Console.WriteLine("not enough stock");
+            LogTransaction();
+        }
+        else
+        {
+            StackQuantity -= quantity;
+            LogTransaction();
+        }
+    }
+
+    public void Restock(int quantity)
+    {
+        StackQuantity += quantity;
+        LogTransaction();
+    }
+
+    public double GetInventoryValue()
+    {
+        PrintDetails();
+        return (price * StackQuantity);
+    }
+
+
+    private void PrintDetails()
+    {
+        Console.WriteLine($"product name :{ProductName}");
+        Console.WriteLine($"product price: {price}");
+        Console.WriteLine($"StockQuantity of the product: {StackQuantity}");
+        
+    }
+
+    private void LogTransaction()
+    {
+        Console.WriteLine($"[System Log] Transaction recorded for {ProductName}. Current Stock: {StackQuantity} units.");
+    }
 }
 
 class Program

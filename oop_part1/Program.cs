@@ -269,6 +269,112 @@ class Program
                         Console.WriteLine($"{b2.holdername} has more money: {b2.balance}");
                     }
                     break;
+                
+                case "9":
+                    Console.Write("dear user, enter the your source account");
+                    int source = int.Parse(Console.ReadLine());
+                    Console.Write("enter the destination account as well");
+                    int destination = int.Parse(Console.ReadLine());
+                    bool match1 = (b1.accountnumber == source && b2.accountnumber == destination);
+                    bool match2=  (b2.accountnumber == source && b1.accountnumber == destination);
+                    if (match1 || match2)
+                    {
+                        Console.Write("dear user, enter the amount to be deposit from the source account:");
+                        amount = double.Parse(Console.ReadLine());
+                        if (match1)
+                        {
+                            if (b1.balance < amount)
+                            {
+                                Console.Write("invalid input, the amount exceeded, the account balance:");
+                            }
+                            else
+                            {
+                                b1.Withdraw(amount);
+                                b2.Deposit(amount);
+                            }
+                        }
+                        else if (match2)
+                        {
+                            if (b1.balance < amount)
+                            {
+                                Console.Write("invalid input, the amount exceeded, the account balance");
+                            }
+                            else
+                            {
+                                b2.Withdraw(amount);
+                                b1.Deposit(amount);
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        
+                       Console.WriteLine("invalid input, one of the account's numbers does not exist");
+                    }
+
+                    break;
+                
+                
+                
+                case "10":
+                    try
+                    {
+                        Console.Write("enter the student name, to update his grade: ");
+                        stu_name = Console.ReadLine();
+                        if (stu_name.Any(char.IsDigit))
+                        {
+                            throw new FormatException("Names cannot contain numbers or special characters.");
+                        }
+                        
+                        match1 = stu_name == s1.name;
+                        match2 = stu_name == s2.name;
+
+                        if (match1)
+                        {
+                            Console.WriteLine("enter the student updated grade");
+                            int grade = int.Parse(Console.ReadLine());
+                            if (grade >= 0 & grade <= 100)
+                            {
+                                s1.grade = grade;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("invalid input, as the grade exceeded the permit grade values");
+                            }
+                        }
+                        else if (match2)
+                        {
+                            Console.WriteLine("enter the student updated grade: ");
+                            int grade = int.Parse(Console.ReadLine());
+                            if (grade >= 0 & grade <= 100)
+                            {
+                                s2.grade = grade;
+                            }
+                            else
+                            {
+                                Console.WriteLine("invalid input, as the grade exceeded the permit grade values");
+                            }
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("invalid input , such a name does not exist");
+                        }
+
+
+
+                    }
+                    catch (FormatException ex)
+                    {
+                        Console.WriteLine($"error ,{ex.Message}");
+                    }break;
+
+
+
+
+
 
 
 

@@ -162,15 +162,22 @@ class Program
         bool choice = true;
         while (choice)
         {
-            // 1. Display the options to the user
+         
             Console.WriteLine("\n--- Main Menu ---");
             Console.WriteLine("1. View Account Details");
             Console.WriteLine("2. Update Student Address");
             Console.WriteLine("3. Make a Deposit");
-            // ... list out the rest of your cases here ...
+            Console.WriteLine("6. Register a Student");
+            Console.WriteLine("7. Compare Two Account Balances");
+            Console.WriteLine("9. Transfer Between Accounts");
+            Console.WriteLine("10. Update Student Grade (Validated)");
+            Console.WriteLine("14. Scholarship Eligibility Check");
             Console.WriteLine("20. Exit");
             Console.Write("Enter your choice (1-20): ");
+
             switch (Console.ReadLine())
+            
+            
             {
                 case "1":
                     Console.Write("enter the accountNumber: ");
@@ -370,21 +377,110 @@ class Program
                     {
                         Console.WriteLine($"error ,{ex.Message}");
                     }break;
+                
+                
+                case "14":
+                    choice = true;
+                    while (choice)
+                    {
+                        
+                        Console.WriteLine("=== Select a Student ===");
+                        Console.WriteLine($"1) {s1.name} (Grade: {s1.grade})");
+                        Console.WriteLine($"2) {s2.name} (Grade: {s2.grade})");
+                        Console.Write("Enter your choice (1 or 2): ");
+                        
+                        student selectedStudent = null;
+                        string studentInput = Console.ReadLine();
+                        
+                        if (studentInput == "1")
+                        {
+                            selectedStudent = s1;
+                        }
+                        else if (studentInput == "2")
+                        {
+                            selectedStudent = s2;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection. Defaulting to Student 1.");
+                            selectedStudent = s1;
+                        }
 
+                        Console.WriteLine(); 
+              
+                        Console.WriteLine("=== Select a Bank Account ===");
+                        Console.WriteLine($"1) {b1.holdername} (Acc: {b1.accountnumber}, Balance: {b1.balance})");
+                        Console.WriteLine($"2) {b2.holdername} (Acc: {b2.accountnumber}, Balance: {b2.balance})");
+                        Console.Write("Enter your choice (1 or 2): ");
 
+                        BankAccount selectedAccount = null;
+                        string accountInput = Console.ReadLine();
 
+                        if (accountInput == "1")
+                        {
+                            selectedAccount = b1;
+                        }
+                        else if (accountInput == "2")
+                        {
+                            selectedAccount = b2;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection. Defaulting to Account 1.");
+                            selectedAccount = b1;
+                        }
 
+                        Console.WriteLine(); 
 
+  
+                        Console.WriteLine($"--- Checking Scholarship for {selectedStudent.name} with {selectedAccount.holdername}'s Account ---");
+                        
+                        if (selectedStudent.grade >= 80 && selectedAccount.balance >= 100)
+                        {
+                            Console.WriteLine("Result: Eligible");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Result: Scholarship Denied due to the following reason(s):");
+                            if (selectedStudent.grade < 80)
+                            {
+                                Console.WriteLine($"- Student's grade ({selectedStudent.grade}) is below the required 80.");
+                            }
+                            if (selectedAccount.balance < 100)
+                            {
+                                Console.WriteLine($"- Account balance ({selectedAccount.balance}) is below the required 100.");
+                            }
+                        }
 
+                   
+                        Console.Write("\nDo you want to check another pair? (y/n): ");
+                        string continueChoice = Console.ReadLine().ToLower();
+                        if (continueChoice != "y")
+                        {
+                            choice = false;
+                        }
+                    }
 
+                    break;
+                case "20":
+                    Console.WriteLine("\nThank you for using the Bank & Student Management System. Goodbye!");
+                    choice = false; 
+                    break;
 
-
-
-
-
-
+                default:
+                    Console.WriteLine("\nInvalid option! Please enter a valid case number between 1 and 20.");
+                    break;
             }
-        }
+
+
+
+
+
+
+
+
+                                }
+                            }
 
 
 
@@ -395,5 +491,5 @@ class Program
 
 
 
-    }
-}
+                        }
+                    

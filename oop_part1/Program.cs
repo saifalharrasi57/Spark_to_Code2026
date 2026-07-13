@@ -50,6 +50,34 @@ public class BankAccount
     
 }
 
+
+class student
+{
+    public int grade;
+    public string name;
+    public string address;
+    private string email;
+    private int age;
+
+    private void registration(string email)
+    {
+        this.email = email; // we did this , becuase we want to store the value of object email, remember we can't assing it in the main function
+        SendEmail();
+    }
+
+    private void SendEmail()
+    {
+        Console.WriteLine($"[Notification] A registration email has been simulated/sent.");
+    }
+    
+    
+    
+    
+    
+    
+
+}
+
 class Program
 {
     static void Main(string[] args)

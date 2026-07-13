@@ -253,9 +253,28 @@ class Program
                         Console.WriteLine("invalid input, such a name doesn't exist");
                     }
                     break;
+                case "7":
+                    int result = b1.balance.CompareTo(b2.balance);
+                    if (result > 0)
+                    {
+                        Console.WriteLine($"{b1.holdername} has more money: {b1.balance}");
+                    }
                     
-                    
-                
+                    else if (result == 0)
+                    {
+                        Console.WriteLine("the two acount has equal amount of money ");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{b2.holdername} has more money: {b2.balance}");
+                    }
+                    break;
+
+
+
+
+
+
 
 
             }

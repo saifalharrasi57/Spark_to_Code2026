@@ -196,21 +196,45 @@ class Program
                     {
                         Console.Write("enter the new address:");
                         s1.address = Console.ReadLine();
+                        Console.WriteLine($"the new address is {s1.address} (changes commited)");
                     }
                     else if(name==s2.name)
                      {
                     Console.Write("enter the new address:");
                     s2.address = Console.ReadLine();
+                    Console.WriteLine($"the new address is {s2.address} (changes commited)");
                      }
                     else
                     {
                         Console.WriteLine("invalid input, such a name doesn't exist");
                     }
                     break;
+                case "3":
+                    Console.Write("enter the accountNumber: ");
+                     account = int.Parse(Console.ReadLine());
+                    Console.Write("enter tme amount to deposit:");
+                    double amount = double.Parse(Console.ReadLine());
+                    if (account == b1.accountnumber)
+                    {
+                        b1.Deposit(amount);
+                        Console.WriteLine($"account new balance = {b1.balance}");
+                    }
+                    
+                  
+                    else if (account == b2.accountnumber)
+                    {
+                        b2.Deposit(amount);
+                        Console.WriteLine($"account new balance = {b2.balance}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("invalid input, such account doesn't exist");
+                    }
+
+                    break;
                 
-                   
-                   
-                   
+
+
             }
         }
 

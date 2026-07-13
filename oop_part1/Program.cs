@@ -1,4 +1,6 @@
-﻿namespace oop_part1;
+﻿using System.Runtime.Intrinsics.X86;
+
+namespace oop_part1;
 
 
 
@@ -124,6 +126,46 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+
+        BankAccount b1 = new BankAccount();
+        b1.accountnumber = 1163;
+        b1.holdername = "karim";
+        b1.balance = 120;
+        
+        BankAccount b2 = new BankAccount();
+        b2.accountnumber = 15203;
+        b2.holdername = "Ali";
+        b2.balance = 63;
+
+        student s1 = new student();
+        s1.grade = 65;
+        s1.name = "Ali";
+        s1.address = "Muscat";
+        
+        student s2 = new student();
+        s2.name = "Ahmed";
+        s2.address = "Muscat";
+        s2.grade = 70;
+
+
+        product p1 = new product();
+        p1.ProductName= "Wireless Mouse";
+        p1.StackQuantity = 50;
+        p1.price = 5.500;
+        
+        product p2 = new product();
+        p2.ProductName = "Mechanical Keyboard";
+        p2.price = 15.570;
+        p2.StackQuantity = 20;
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -3,13 +3,13 @@
 
 class Room
 {
-    public int roomNumber;
+    public string roomNumber;
     public string roomType;
     public double pricePerNight;
     public bool isAvailable;
 
 
-    public Room(string roomType,int roomNumber,double pricePerNight, bool isAvailable)
+    public Room(string roomType,string roomNumber,double pricePerNight, bool isAvailable)
     {
         this.roomNumber = roomNumber;
         this.pricePerNight = pricePerNight;
@@ -32,9 +32,9 @@ class Room
 
 class Guest
 {
-    public int guestId;
+    public string guestId;
     public string guestName;
-    public int roomNumber;
+    public string roomNumber;
     public DateTime checkInDate;
     public int totalNights;
 
@@ -69,12 +69,12 @@ class Program
 
     static void Main(string[] args)
     {
-        rooms.Add(new Room("singel", 1, 22, true));
-        rooms.Add(new Room("singel", 2, 22, true));
-        rooms.Add(new Room("Double", 3, 32, true));
-        rooms.Add(new Room("Double", 14, 32, true));
-        rooms.Add(new Room("Suite", 13, 60, true));
-        rooms.Add(new Room("Suite", 19, 60, true));
+        rooms.Add(new Room("singel", "1", 22, true));
+        rooms.Add(new Room("singel", "2", 22, true));
+        rooms.Add(new Room("Double", "3", 32, true));
+        rooms.Add(new Room("Double", "14", 32, true));
+        rooms.Add(new Room("Suite", "13", 60, true));
+        rooms.Add(new Room("Suite", "19", 60, true));
 
 
         bool keepRunning = true;
@@ -82,7 +82,6 @@ class Program
         while (keepRunning)
         {
             // 1. Clear the screen for a clean look each time the menu loads
-            Console.Clear();
 
             // 2. Display the Main Menu Layout
             Console.WriteLine("================================================");
@@ -111,40 +110,87 @@ class Program
             switch (Console.ReadLine())
             {
                 case "1":
-                    bool run = true;
-                    while (run)
+                    try
                     {
-                        Console.Write("dear clerk, enter the room number:");
-                        int roomNumber = int.Parse(Console.ReadLine());
-                        Console.Write("room type:");
-                        string roomtype = Console.ReadLine();
-                        Console.Write("room price per night :");
-                        double roomPrice = double.Parse(Console.ReadLine());
-                        if (roomNumber < 0 || roomPrice < 0)
+                        bool run = true;
+                        while (run)
                         {
-                            Console.WriteLine("invalid , you typed negative  input");
-                        }
-                        else
-                        {
-                            run = false;
-                            bool roomExist = rooms.Any(room => room.roomNumber == roomNumber);
-                            if (!roomExist)
-                            {
-                                rooms.Add(new Room(roomtype, roomNumber, roomPrice, true));
+                            Console.Write("dear clerk, enter the room number:");
+                            string roomNumber = (Console.ReadLine());
+                            Console.Write("room type:");
+                            string roomtype = Console.ReadLine();
+                            Console.Write("room price per night :");
+                            double roomPrice = double.Parse(Console.ReadLine());
+              
+                          
+                                run = false;
+                                bool roomExist = rooms.Any(room => room.roomNumber == roomNumber);
+                                if (!roomExist)
+                                {
+                                    rooms.Add(new Room(roomtype, roomNumber, roomPrice, true));
+                                }
+                                else
+                                {
+                                    Console.WriteLine(" error, this room number already exist.");
+                                
                             }
-                            else
-                            {
-                                Console.WriteLine(" error, this room number already exist.");
-                            }
-                        }
 
-                        
-                    }break;
+
+                        }
+                    }
+                    catch(FormatException ex)
+                    {
+                        Console.WriteLine("invalid input, tru again ");
+                    }
+
+                    break;
+                
+                
+                
+                case "2":
+                    
+                    Console.WriteLine("dear user, please enter you following details: ");
+                    Console.Write("1- Guest name: ");
+                    string guestName = Console.ReadLine();
+                    Console.Write("2- checkin Date (dd/MM/yyyy): ");
+                    string checkinDate = Console.ReadLine();
+                    Console.Write("1- number of nights planned to stay: ");
+                    int numberNights = int.Parse(Console.ReadLine());
+                    
+                    // auto- generated id, for the quests
+                    string guestId = $"{guests.Count + 1:D3}";
+                    Console.WriteLine($"Guest Id : {guestId}");
+                    Guest G1 = new Guest();
+                    G1.guestName = guestName;
+                    G1.guestId = guestId;
+                    G1.totalNights = numberNights;
+                    G1.checkInDate = DateTime.Parse(checkinDate);
+                    G1.roomNumber = "not assigned";
+                    guests.Add(G1);
+                    // --- display guest detail ---
+                    Console.WriteLine("\n================================================");
+                    Console.WriteLine("           GUEST REGISTRATION DETAILS           ");
+                    Console.WriteLine("================================================");
+                    Console.WriteLine($"Guest ID        : {G1.guestId}");
+                    Console.WriteLine($"Guest Name      : {G1.guestName}");
+                    Console.WriteLine($"Assigned Room   : {G1.roomNumber}");
+                    Console.WriteLine($"Checkin Date    : {G1.checkInDate}");
+                    Console.WriteLine($"Total Nights    : {G1.totalNights}");
+                    
+                    Console.WriteLine("================================================");
+                    
+                    
+            break;        
             }
+
+            
+
+
+
+
+
+        }
         
-
-
-
-    }
+        
     }
 }

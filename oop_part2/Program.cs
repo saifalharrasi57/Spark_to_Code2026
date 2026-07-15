@@ -121,34 +121,34 @@ class Program
                             string roomtype = Console.ReadLine();
                             Console.Write("room price per night :");
                             double roomPrice = double.Parse(Console.ReadLine());
-              
-                          
-                                run = false;
-                                bool roomExist = rooms.Any(room => room.roomNumber == roomNumber);
-                                if (!roomExist)
-                                {
-                                    rooms.Add(new Room(roomtype, roomNumber, roomPrice, true));
-                                }
-                                else
-                                {
-                                    Console.WriteLine(" error, this room number already exist.");
-                                
+
+
+                            run = false;
+                            bool roomExist = rooms.Any(room => room.roomNumber == roomNumber);
+                            if (!roomExist)
+                            {
+                                rooms.Add(new Room(roomtype, roomNumber, roomPrice, true));
+                            }
+                            else
+                            {
+                                Console.WriteLine(" error, this room number already exist.");
+
                             }
 
 
                         }
                     }
-                    catch(FormatException ex)
+                    catch (FormatException ex)
                     {
                         Console.WriteLine("invalid input, tru again ");
                     }
 
                     break;
-                
-                
-                
+
+
+
                 case "2":
-                    
+
                     Console.WriteLine("dear user, please enter you following details: ");
                     Console.Write("1- Guest name: ");
                     string guestName = Console.ReadLine();
@@ -156,7 +156,7 @@ class Program
                     string checkinDate = Console.ReadLine();
                     Console.Write("1- number of nights planned to stay: ");
                     int numberNights = int.Parse(Console.ReadLine());
-                    
+
                     // auto- generated id, for the quests
                     string guestId = $"{guests.Count + 1:D3}";
                     Console.WriteLine($"Guest Id : {guestId}");
@@ -176,100 +176,135 @@ class Program
                     Console.WriteLine($"Assigned Room   : {G1.roomNumber}");
                     Console.WriteLine($"Checkin Date    : {G1.checkInDate}");
                     Console.WriteLine($"Total Nights    : {G1.totalNights}");
-                    
+
                     Console.WriteLine("================================================");
-                    
-                    
-            break;   
-                
-                
-            case "6":
-                Console.Write(" Display a sub-menu: (1) Show all available rooms (2) Filter by room type (3) Filter by max price (4) Room price\nstatistics (0) Back: ");
-                string choice = (Console.ReadLine());
-                switch (choice)
-                {
-                    case "1":
-                        List<Room> availabelRooms = rooms.Where(b => b.isAvailable).OrderByDescending(b => b.pricePerNight).ToList();
-                        if (availabelRooms.Count == 0)
-                        {
-                            Console.WriteLine("No rooms found for the selected criteria");
-                        }
-                        else
-                        {
-                            foreach (Room i in availabelRooms)
+
+
+                    break;
+
+
+                case "6":
+                    Console.Write(
+                        " Display a sub-menu: (1) Show all available rooms (2) Filter by room type (3) Filter by max price (4) Room price\nstatistics (0) Back: ");
+                    string choice = (Console.ReadLine());
+                    switch (choice)
+                    {
+                        case "1":
+                            List<Room> availabelRooms = rooms.Where(b => b.isAvailable)
+                                .OrderByDescending(b => b.pricePerNight).ToList();
+                            if (availabelRooms.Count == 0)
                             {
-                                Console.WriteLine(i.roomNumber);
+                                Console.WriteLine("No rooms found for the selected criteria");
+                            }
+                            else
+                            {
+                                foreach (Room i in availabelRooms)
+                                {
+                                    Console.WriteLine(i.roomNumber);
+                                }
+
                             }
 
-                        }
-
-                        break;
-                    case "2":
-                        Console.Write(" enter the room type:");
-                        string roomType = Console.ReadLine();
-                        List<Room> theType = rooms.Where(b => b.roomType == roomType).ToList();
-                        if (theType.Count == 0)
-                        {
-                            Console.WriteLine("No rooms found for the selected criteria.'");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"number of rooms with type:{roomType} = {theType.Count}");
-                            foreach (Room i in theType)
+                            break;
+                        case "2":
+                            Console.Write(" enter the room type:");
+                            string roomType = Console.ReadLine();
+                            List<Room> theType = rooms.Where(b => b.roomType == roomType).ToList();
+                            if (theType.Count == 0)
                             {
-                                Console.WriteLine(i.roomNumber);
+                                Console.WriteLine("No rooms found for the selected criteria.'");
                             }
-                        }
-
-                        break;
-                    
-                    case"3":
-                        Console.Write(" enter the maximum price to pay: ");
-                        double maxPrice = double.Parse(Console.ReadLine());
-                        List<Room> roomPrice = rooms.Where(b => b.isAvailable && b.pricePerNight <= maxPrice).ToList();
-                        if (roomPrice.Count == 0)
-                        {
-                            Console.WriteLine("No rooms found for the selected criteria.");
-                        }
-                        else
-                        {
-                            foreach (Room i in roomPrice)
+                            else
                             {
-                                Console.WriteLine(i.roomNumber);
+                                Console.WriteLine($"number of rooms with type:{roomType} = {theType.Count}");
+                                foreach (Room i in theType)
+                                {
+                                    Console.WriteLine(i.roomNumber);
+                                }
                             }
-                        }
 
-                        break;
-                    
-                    case "4":
-                        Console.WriteLine($"the total number of rooms in this hotel: {rooms.Count}");
-                        availabelRooms = rooms.Where(b => b.isAvailable).ToList();
+                            break;
+
+                        case "3":
+                            Console.Write(" enter the maximum price to pay: ");
+                            double maxPrice = double.Parse(Console.ReadLine());
+                            List<Room> roomPrice =
+                                rooms.Where(b => b.isAvailable && b.pricePerNight <= maxPrice).ToList();
+                            if (roomPrice.Count == 0)
+                            {
+                                Console.WriteLine("No rooms found for the selected criteria.");
+                            }
+                            else
+                            {
+                                foreach (Room i in roomPrice)
+                                {
+                                    Console.WriteLine(i.roomNumber);
+                                }
+                            }
+
+                            break;
+
+                        case "4":
+                            Console.WriteLine($"the total number of rooms in this hotel: {rooms.Count}");
+                            availabelRooms = rooms.Where(b => b.isAvailable).ToList();
+
+                            Console.WriteLine($"the available rooms: {availabelRooms.Count()}");
+                            if (availabelRooms.Count == 0)
+                            {
+                                Console.WriteLine("No rooms found for the selected criteria");
+                            }
+                            else
+                            {
+                                Console.WriteLine(
+                                    $"the average price of this hotel rooms: {rooms.Average(b => b.pricePerNight):f2}");
+                                Console.WriteLine(
+                                    $"the cheepest price of this hotel rooms: {rooms.Min(b => b.pricePerNight):f2}");
+                                Console.WriteLine(
+                                    $"the cheepest price of this hotel rooms: {rooms.Max(b => b.pricePerNight):f2}");
+                            }
+
+                            break;
                         
-                        Console.WriteLine($"the available rooms: {availabelRooms.Count()}");
-                        if (availabelRooms.Count == 0)
-                        {
-                            Console.WriteLine("No rooms found for the selected criteria");
-                        }
-                        else
-                        {
-                            Console.WriteLine(
-                                $"the average price of this hotel rooms: {rooms.Average(b => b.pricePerNight):f2}");
-                            Console.WriteLine(
-                                $"the cheepest price of this hotel rooms: {rooms.Min(b => b.pricePerNight):f2}");
-                            Console.WriteLine(
-                                $"the cheepest price of this hotel rooms: {rooms.Max(b => b.pricePerNight):f2}");
-                        }
+                        
+                        
+                        default:
+                            Console.WriteLine("Invalid selection. Please enter a number between 0 and 15.");
+                            break;
+                    }
+                    break;
 
-                        break;
+                    
+
+                    
+            
+
+            case "8":
+                Console.Write("dear clerk , enter the room number , to update the price:  ");
+                 string roomNumbers = Console.ReadLine();
+                Room found = rooms.FirstOrDefault(b => b.roomNumber == roomNumbers);
+                if (found == null)
+                {
+                    Console.WriteLine("such a rooms does not exist");
                 }
+                else
+                {
+                    
+                    Console.Write("update the price: ");
+                    double updatePrice = double.Parse(Console.ReadLine());
+                    if (updatePrice > 0)
+                    {
+                        double oldPrice = found.pricePerNight;
+                        found.pricePerNight = updatePrice;
+                        Console.WriteLine($"the update confirmed, ---old price---: {oldPrice},---updated price---:{found.pricePerNight}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("invalid input");
+                    }
+                }
+                 
                 break;
-
-                
-                
-                
-                
-                
-                }
+            }
                 
             }
 

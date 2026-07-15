@@ -70,10 +70,10 @@ class Program
     static void Main(string[] args)
     {
         rooms.Add(new Room("singel", "1", 22, true));
-        rooms.Add(new Room("singel", "2", 22, true));
+        rooms.Add(new Room("singel", "2", 60, false));
         rooms.Add(new Room("Double", "3", 32, true));
-        rooms.Add(new Room("Double", "14", 32, true));
-        rooms.Add(new Room("Suite", "13", 60, true));
+        rooms.Add(new Room("Double", "14", 90, true));
+        rooms.Add(new Room("Suite", "13", 23, true));
         rooms.Add(new Room("Suite", "19", 60, true));
 
 
@@ -180,17 +180,103 @@ class Program
                     Console.WriteLine("================================================");
                     
                     
-            break;        
+            break;   
+                
+                
+            case "6":
+                Console.Write(" Display a sub-menu: (1) Show all available rooms (2) Filter by room type (3) Filter by max price (4) Room price\nstatistics (0) Back: ");
+                string choice = (Console.ReadLine());
+                switch (choice)
+                {
+                    case "1":
+                        List<Room> availabelRooms = rooms.Where(b => b.isAvailable).OrderByDescending(b => b.pricePerNight).ToList();
+                        if (availabelRooms.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria");
+                        }
+                        else
+                        {
+                            foreach (Room i in availabelRooms)
+                            {
+                                Console.WriteLine(i.roomNumber);
+                            }
+
+                        }
+
+                        break;
+                    case "2":
+                        Console.Write(" enter the room type:");
+                        string roomType = Console.ReadLine();
+                        List<Room> theType = rooms.Where(b => b.roomType == roomType).ToList();
+                        if (theType.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria.'");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"number of rooms with type:{roomType} = {theType.Count}");
+                            foreach (Room i in theType)
+                            {
+                                Console.WriteLine(i.roomNumber);
+                            }
+                        }
+
+                        break;
+                    
+                    case"3":
+                        Console.Write(" enter the maximum price to pay: ");
+                        double maxPrice = double.Parse(Console.ReadLine());
+                        List<Room> roomPrice = rooms.Where(b => b.isAvailable && b.pricePerNight <= maxPrice).ToList();
+                        if (roomPrice.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria.");
+                        }
+                        else
+                        {
+                            foreach (Room i in roomPrice)
+                            {
+                                Console.WriteLine(i.roomNumber);
+                            }
+                        }
+
+                        break;
+                    
+                    case "4":
+                        Console.WriteLine($"the total number of rooms in this hotel: {rooms.Count}");
+                        availabelRooms = rooms.Where(b => b.isAvailable).ToList();
+                        
+                        Console.WriteLine($"the available rooms: {availabelRooms.Count()}");
+                        if (availabelRooms.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria");
+                        }
+                        else
+                        {
+                            Console.WriteLine(
+                                $"the average price of this hotel rooms: {rooms.Average(b => b.pricePerNight):f2}");
+                            Console.WriteLine(
+                                $"the cheepest price of this hotel rooms: {rooms.Min(b => b.pricePerNight):f2}");
+                            Console.WriteLine(
+                                $"the cheepest price of this hotel rooms: {rooms.Max(b => b.pricePerNight):f2}");
+                        }
+
+                        break;
+                }
+                break;
+
+                
+                
+                
+                
+                
+                }
+                
             }
 
             
 
-
-
-
-
         }
         
         
+        
     }
-}

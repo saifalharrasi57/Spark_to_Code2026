@@ -50,9 +50,9 @@ class Guest
         Console.WriteLine($"total nights of {guestName} at the hotel:{totalNights}");
     }
 
-    public void calculateTotalCost()
+    public double calculateTotalCost(double price)
     {
-        ///////
+        return price * totalNights;
     }
     
 
@@ -304,6 +304,116 @@ class Program
                 }
                  
                 break;
+            
+            
+            
+            case "11":
+                Console.Write("enter the guest ID: ");
+                string guestsId = (Console.ReadLine());
+                Guest founds = guests.FirstOrDefault(b => b.guestId == guestsId);
+                if (founds== null)
+                {
+                    Console.WriteLine("no guest with given id ");
+                }
+                else
+                {
+                    if (founds.roomNumber == "not assigned")
+                    {
+                        Console.WriteLine("This guest has no active booking.");
+                    }
+                    else
+                    {
+                        Room r_found = rooms.FirstOrDefault(b => b.roomNumber == founds.roomNumber);
+                        
+                        Console.WriteLine("customer detail:");
+                        Console.WriteLine($"guest name: {founds.guestName} ");
+                        Console.WriteLine($"room number: {founds.roomNumber}");
+                        Console.WriteLine($"room type: {r_found.roomType}");
+                        Console.WriteLine($"checkin date: {founds.checkInDate}");
+                        Console.WriteLine($"total night: {founds.totalNights}");
+                        Console.WriteLine($"price per night:{r_found.pricePerNight}");
+                        Console.WriteLine($"the total cost: {founds.calculateTotalCost(r_found.pricePerNight)}");
+                        
+                        
+                        Console.WriteLine("confirm checkout: Y/N");
+                        if (Console.ReadLine() == "y".ToUpper())
+                        {
+                            r_found.isAvailable = true;
+                            guests.Remove(founds);
+                            Console.WriteLine(" checkout successeeded");
+                            foreach (Guest i in guests)
+                            {
+                                Console.WriteLine(i.guestId);
+                            }
+                            {
+                                
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(" checkout request cancelled");
+                        }
+                        
+                    }
+                        
+                }
+                
+                break;
+            
+            
+            
+            case "12":
+                    List<Room> unavailableRooms = rooms.Where(b => b.isAvailable = false).ToList();
+                    bool removed = false;
+                    List<Room> removableRooms= new List<Room>();
+                    foreach (Room i in unavailableRooms.OrderBy(b => b.roomNumber))
+                    {
+                        if (! guests.Any(b => b.roomNumber == i.roomNumber))
+                        {
+                            // rooms.Remove(i)
+                            // removableRooms.Remove(i);
+                            removed = true;
+                            Console.WriteLine("removed room detail");
+                            Console.WriteLine($"the removal of {i.roomNumber} is confirmed");
+                            Console.WriteLine($"room type: {i.roomType}");
+                            Console.WriteLine($"room price: {i.pricePerNight}");
+                          
+                            removableRooms.Add(i);
+                        }
+                       
+
+                        else if (removed == false)
+                        {
+                            Console.WriteLine("All unavailable rooms are currently occupied.No rooms can be decommissioned");
+                        }
+                       
+                        
+
+
+
+
+                    }
+                    Console.Write($" number of removable rooms : {removableRooms.Count} => do you confirm the removal(y/n): ");
+                    string useriNPUT = Console.ReadLine().ToLower();
+                    if (useriNPUT == "y")
+                    {
+                        int removedCount =
+                            rooms.RemoveAll(r => !r.isAvailable && !guests.Any(g => g.roomNumber == r.roomNumber));
+                        Console.WriteLine($"\nSuccess! {removedCount} room(s) have been decommissioned.");
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    break;
+                    
+
+                default:
+                Console.WriteLine("Invalid selection. Please enter a number between 0 and 15.");
+                    break;
+                
+                
             }
                 
             }
